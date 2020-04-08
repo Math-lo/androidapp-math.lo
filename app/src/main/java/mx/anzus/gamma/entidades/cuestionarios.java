@@ -1,0 +1,57 @@
+package mx.anzus.gamma.entidades;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+
+public class cuestionarios {
+
+    @Expose
+    @SerializedName("codigo")
+    private String codigo;
+
+    @Expose
+    @SerializedName("error")
+    private String error;
+
+    @Expose
+    @SerializedName("mensaje")
+    private String mensaje;
+
+    @Expose
+    @SerializedName("cuestionarios")
+    private ArrayList<ArrayList> cuestionarios;
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public ArrayList<ArrayList> getCuestionarios() {
+        return cuestionarios;
+    }
+
+    public void setCuestionarios(ArrayList<ArrayList> cuestionarios) {
+        this.cuestionarios = cuestionarios;
+    }
+}

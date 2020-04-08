@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Math.lo</string>
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Iniciar Sesion</string>
+    <string name="group">Grupos</string>
+    <string name="cuestionario">Cuestionarios</string>
+</resources>
