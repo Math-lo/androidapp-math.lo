@@ -5,56 +5,93 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class AlumnosActivity extends AppCompatActivity {
 
-    ListView listViewGroups;
+    ExpandableListView expandableListView;
+    ExpandableListAdapter expandableListAdapter;
+    List<String> expandableListTitle;
+    HashMap<String, List<String>> expandableListDetail;
     Intent lastActivity;
     String mode,user,grupo;
-    String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-            "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-            "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-            "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-            "Android", "iPhone", "WindowsMobile" };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alumnos);
         try {
-            listViewGroups = (ListView) findViewById(R.id.listview_alumnos);
-            ArrayList bandArray = new ArrayList<String>();
             lastActivity = getIntent();
             mode = lastActivity.getStringExtra("MODE");
             user = lastActivity.getStringExtra("TOKEN");
             grupo = lastActivity.getStringExtra("GRUPO");
             Toast.makeText(this, mode + " " + user, Toast.LENGTH_LONG).show();
-            ArrayList alumnos = Database.getAlumnosGroup(grupo,Database.getIdMail(user));
-            for (int i = 0; i < alumnos.size(); i++) {
-                bandArray.add(alumnos.get(i));
-            }
-            // Creamos el adaptdor
-            ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this, R.layout.item_group, R.id.id_textView_group, bandArray);
-            //Asignamos el adaptador a la listView
-            listViewGroups.setAdapter(arrayAdapter);
-            listViewGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+            expandableListDetail = getData();
+            expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
+            expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, expandableListDetail);
+            expandableListView.setAdapter(expandableListAdapter);
+            expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    // Get the selected item text from ListView
-                    String selectedItem = (String) parent.getItemAtPosition(position);
-                    // Display the selected item text on TextView
-                    Toast.makeText(AlumnosActivity.this, selectedItem, Toast.LENGTH_SHORT).show();
+                public void onGroupExpand(int groupPosition) {
+                    Toast.makeText(getApplicationContext(),
+                            expandableListTitle.get(groupPosition) + " List Expanded.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+
+                @Override
+                public void onGroupCollapse(int groupPosition) {
+                    Toast.makeText(getApplicationContext(),
+                            expandableListTitle.get(groupPosition) + " List Collapsed.",
+                            Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                @Override
+                public boolean onChildClick(ExpandableListView parent, View v,
+                                            int groupPosition, int childPosition, long id) {
+                    Toast.makeText(
+                            getApplicationContext(),
+                            expandableListTitle.get(groupPosition)
+                                    + " -> "
+                                    + expandableListDetail.get(
+                                    expandableListTitle.get(groupPosition)).get(
+                                    childPosition), Toast.LENGTH_SHORT
+                    ).show();
+                    return false;
                 }
             });
         }catch (Exception e){
             System.out.println("Error en AlumnosActivity: "+e.getMessage());
         }
+    }
+
+
+    public HashMap<String, List<String>> getData() {
+        HashMap<String, List<String>> expandableListDetail = new HashMap<String, List<String>>();
+        ArrayList alumnos = Database.getAlumnosGroup(grupo,Database.getIdMail(user));
+        for (int i =0;i<alumnos.size();i++){
+            ArrayList alumno = (ArrayList)alumnos.get(i);
+            ArrayList detalle = new ArrayList();
+            detalle.add("Correo: "+alumno.get(0));
+            detalle.add("CURP: "+alumno.get(2));
+            expandableListDetail.put(alumno.get(1).toString(),detalle);
+        }
+        return expandableListDetail;
     }
 }

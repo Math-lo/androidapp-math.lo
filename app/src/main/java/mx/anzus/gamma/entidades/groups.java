@@ -23,6 +23,18 @@ public class groups {
     @SerializedName("alumnos")
     private ArrayList<ArrayList> alumnos;
 
+    @Expose
+    @SerializedName("alumnosGrupo")
+    private ArrayList<ArrayList> alumnosGrupo;
+
+    public ArrayList<ArrayList> getAlumnosGrupo() {
+        return alumnosGrupo;
+    }
+
+    public void setAlumnosGrupo(ArrayList<ArrayList> alumnosGrupo) {
+        this.alumnosGrupo = alumnosGrupo;
+    }
+
     public String getCodigo() {
         return codigo;
     }

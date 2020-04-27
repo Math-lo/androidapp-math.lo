@@ -29,6 +29,30 @@ public class user {
     @SerializedName("Token")
     private String Token;
 
+    @Expose
+    @SerializedName("Nombre")
+    private String Nombre;
+
+    @Expose
+    @SerializedName("Curp")
+    private String Curp;
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String nombre) {
+        Nombre = nombre;
+    }
+
+    public String getCurp() {
+        return Curp;
+    }
+
+    public void setCurp(String curp) {
+        Curp = curp;
+    }
+
     public String getToken() {
         return Token;
     }

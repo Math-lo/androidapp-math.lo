@@ -17,13 +17,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".loadingscreens.LoadingN1Activity"></activity>
-        <activity android:name=".loadingscreens.LoadingN2Activity"></activity>
+        <activity android:name=".loadingscreens.LoadingN4Activity"></activity>
+        <activity android:name=".MenuUsuario"></activity>
         <activity android:name=".MenuAlumnoActivity"></activity>
         <activity android:name=".MenuPrAuAdActivity"></activity>
-        <activity android:name=".GroupsActivity"></activity>
         <activity android:name=".AlumnosActivity"></activity>
-        <activity android:name=".CuestionariosActivity"></activity>
-        <activity android:name=".loadingscreens.LoadingN3Activity"></activity>
+        <activity android:name=".DetalleCuestionarioActivity"></activity>
     </application>
 
 </manifest>

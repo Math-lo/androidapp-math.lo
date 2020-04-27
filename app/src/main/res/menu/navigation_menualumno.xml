@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+    <item android:id="@+id/usuario_nav"
+        android:icon="@mipmap/ic_user_foreground"
+        android:title="@string/user"/>
+    <item android:id="@+id/cuestionarios_nav"
+        android:icon="@drawable/test"
+        android:title="@string/cuestionario"/>
+        <item android:title="@string/Configuracion">
+            <menu>
+                <item android:id="@+id/sincronizar_nav"
+                    android:icon="@drawable/sync"
+                    android:title="@string/Sinconizar"/>
+                <item android:id="@+id/cerrarsesion_nav"
+                    android:icon="@drawable/logout"
+                    android:title="@string/CerrarSesion"/>
+            </menu>
+        </item>
+    </group>
+</menu>

@@ -4,13 +4,12 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/id_textView_alumno"
-        android:layout_width="wrap_content"
+        android:id="@+id/listTitle"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/white"
-        android:layout_margin="12dp"
-        android:gravity="center"
-        />
+        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:textColor="@android:color/black"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" />
 
 </LinearLayout>
